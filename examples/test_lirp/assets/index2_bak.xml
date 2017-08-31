@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flowers>
+<Flower>
+       <Vendor>shop1</Vendor>
+       <Name>iris</Name>
+       <Price>$4.00</Price>
+</Flower>
+<Flower>
+       <Vendor>shop3</Vendor>
+       <Name>iris</Name>
+       <Price>$3.50</Price>
+</Flower>
+</Flowers>

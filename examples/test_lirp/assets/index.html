@@ -1,0 +1,258 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset="utf-8">
+    <title>Lirp选择规则</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>cmd</h2>  
+  <input type="file" id="files" style="display:none" onchange="jsReadfile(this.files)"/>
+  <button type="button" class="btn btn-success" id="readfile">发送xml文件消息</button>
+</div>
+
+<div class="container">
+  <h2>Lirp选择规则, 框架</h2>
+  <p><strong>提示:</strong> 选择规则的设置，动态的设置，多变的设置</p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">首页</a></li>
+    <li><a data-toggle="tab" href="#menu1">菜单 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">菜单 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">菜单 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>AddSelectSpec</h3>
+      <h3></h3>
+      <h3></h3>
+      <form role="form" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-name1">SelectSpecID</label>
+          <div class="col-sm-10">
+            <input name="product_description[0][name]"  placeholder="用$('#SelectSpecID').attr('placeholder')获取值" id="SelectSpecID" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-name1">Priority</label>
+          <div class="col-sm-10">
+            <input name="product_description[1][name]"  placeholder="1" id="Priority" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-name1">CurrentState</label>
+          <div class="col-sm-10">
+            <input name="product_description[1][name]"  placeholder="1" id="CurrentState" class="form-control" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="input-name1">Persistence</label>
+          <div class="col-sm-10">
+            <input name="product_description[1][name]"  placeholder="1" id="Persistence" class="form-control" type="text">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#SelectSpecStartTrigger">SelectSpecStartTrigger</a></li>
+            <li class=""><a data-toggle="tab" href="#SelectSpecStopTrigger">SelectSpecStopTrigger</a></li>
+            <li class=""><a data-toggle="tab" href="#AntennaSpec">AntennaSpec</a></li>
+            <li class="disabled"><a data-toggle="tab" href="#SelectReportSpec">SelectReportSpec</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="SelectSpecStartTrigger" class="tab-pane active"> 
+              <p class="col-lg-12">SelectSpecStartTrigger，开始条件说明。。。。。。。</p>
+              <div class="form-group row">
+                <label class="col-sm-2 control-label" for="input-name1">SelectSpecStartTriggerType</label>
+                <div class="col-sm-10">
+                  <select class="form-control">
+                    <option value="">选择下拉： 可用在枚举的选择例如LLRP_tESelectSpecStartTriggerType</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="container">
+                <div class="form-group">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#SelectSpecStartTrigger1">SelectSpecStartTrigger1</a></li>
+                    <li class=""><a data-toggle="tab" href="#AntennaSpec1">AntennaSpec1</a></li>
+                    <li class="disabled"><a data-toggle="tab" href="#SelectReportSpec1">SelectReportSpec1</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div id="SelectSpecStartTrigger1" class="tab-pane active"> 
+                      <p>SelectSpecStartTrigger，开始条件</p>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-name1">SelectSpecID</label>
+                        <div class="col-sm-10">
+                          <input name="product_description[0][name]"  placeholder="用$('#SelectSpecID').attr('placeholder')获取值" id="SelectSpecID" class="form-control" type="text">
+                        </div>
+                      </div>
+                    </div>
+                    <div id="AntennaSpec1" class="tab-pane "> 
+                      <p>SpecParameter目前协议只能是AntennaSpec</p>
+                    </div>
+                    <div id="SelectReportSpec1" class="tab-pane "> 
+                      <p>disabled 该 class 只会改变 &lt;a&gt; 的外观，不会改变它的功能</p>
+                      <p>SelectReportSpec,选择规则报告，有些是必须，有些频繁就不需要报告</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div id="SelectSpecStopTrigger" class="tab-pane "> 
+              <p>SelectSpecStopTrigger, 停止条件</p>
+            </div>
+            <div id="AntennaSpec" class="tab-pane "> 
+              <p>SpecParameter目前协议只能是AntennaSpec</p>
+            </div>
+            <div id="SelectReportSpec" class="tab-pane "> 
+              <p>disabled 该 class 只会改变 &lt;a&gt; 的外观，不会改变它的功能</p>
+              <p>SelectReportSpec,选择规则报告，有些是必须，有些频繁就不需要报告</p>
+            </div>
+          </div>
+        </div>
+
+        <!--  -->
+        <parameter repeat="1"   type="SelectSpecStartTrigger"/>
+        <parameter repeat="1"   type="SelectSpecStopTrigger"/>
+        <choice    repeat="1-N" type="SpecParameter"/> 
+        <parameter repeat="0-1" type="SelectReportSpec"/>
+        <!--  -->
+
+        <!--  -->
+        <div class="form-group">
+          <select class="form-control">
+            <option value="">选择下拉： 可用在枚举的选择例如LLRP_tESelectSpecStartTriggerType</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>菜单 1</h3>
+      <p>这是菜单 1 显示的内容。这是菜单 1 显示的内容。这是菜单 1 显示的内容。</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>菜单 2</h3>
+      <p>这是菜单 2 显示的内容。这是菜单 2 显示的内容。这是菜单 2 显示的内容。</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>菜单 3</h3>
+      <p>这是菜单 3 显示的内容。这是菜单 3 显示的内容。这是菜单 3 显示的内容。</p>
+    </div>
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-lg-push-10">
+        <button type="button" class="btn btn-primary" onclick="clickSendSpec()">添加规则</button>
+      </div>
+    </div>
+      
+    </div> 
+
+    <div id="xml" class="container">input:
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var $xml = $("#xml");
+var html = "";
+var $SelectSpecID = $("input#SelectSpecID");
+// $SelectSpecID.change( function() {
+//   html = $SelectSpecID.val();//every change u should get again
+//   $xml.html(html);
+// });
+function updata(argument) {
+  html = "<lirp:SelectSpecID>";
+  html += $SelectSpecID.val();
+  html += "</lirp:SelectSpecID>";
+}
+function postXml(argument) {
+  $.ajax({
+     url:'/',
+     type:'post',
+     // data: html,
+     data: argument,
+     dataType:'xml',
+     success:function(data){
+         //成功之后调用该函数
+         //data:服务器返回的数据，
+         //如果服务器返回的是一个xml文档
+         //需要调用$(data),将xml转换成一个jQuery对象
+         // $('#s1').after("<div id='tips'></div>");
+         // $('#tips').html('描述:'
+         // + $(data).find('desc').text() + ' 价格:'
+         // + $(data).find('price').text());
+         $data = $(data);
+         console.log($data.text());
+         console.log($data.find('lirp:SelectSpecID').text());
+         console.log($data.find('SelectSpecID').text());
+         console.log($data);
+         console.log($data[0]);
+         console.log(($data[0].activeElement));
+         console.log($data.find('lirp:EnableSelectSpec'));
+         console.log($data.find('EnableSelectSpec'));
+         console.log($data.find('EnableSelectSpec').text());//prefix is not suport for jquery
+         alert("发送成功!");
+     },
+     error:function(){
+         //失败调用该函数
+         alert('发送失败');
+     }
+  });
+}
+//main
+function clickSendSpec(argument) {
+    updata();
+    $xml.text(html);
+    postXml(html);
+}
+
+function AddSelectSpec(argument) {
+
+} 
+function DeleteSelectSpec(argument) {
+  // body...
+}
+
+function EnableSelectSpec(argument) {
+  // body...
+}
+function StartSelectSpec(argument) {
+  // body...
+}
+function DisableSelectSpec(argument) {
+  // body...
+}
+function StopSelectSpec(argument) {
+  // body...
+}
+
+$("#readfile").click(function(){//点击导入按钮，使files触发点击事件，然后完成读取文件的操作。
+    $("#files").click();
+});
+function jsReadfile(files){
+  // var selectedFile = document.getElementById("files").files[0];//获取读取的File对象
+  var selectedFile = files[0];//获取读取的File对象
+  var name = selectedFile.name;//读取选中文件的文件名
+  var size = selectedFile.size;//读取选中文件的大小
+  console.log("文件名:"+name+"大小："+size);
+
+  var reader = new FileReader();//这里是核心！！！读取操作就是由它完成的。
+  reader.readAsText(selectedFile);//读取文件的内容
+  reader.onload = function(){
+      console.log(this.result);//当读取完成之后会回调这个函数，然后此时文件的内容存储到了result中。直接操作即可。
+      postXml(this.result);
+  };
+}
+</script>
+
+</body>
+</html>

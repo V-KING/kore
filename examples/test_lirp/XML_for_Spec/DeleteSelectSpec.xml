@@ -1,0 +1,4 @@
+<lirp:DeleteSelectSpec MessageID='1002'
+  xmlns:lirp='http://www.tmri.cn'>
+  <lirp:SelectSpecID>0</lirp:SelectSpecID>
+</lirp:DeleteSelectSpec>

@@ -487,7 +487,7 @@ cli_build(int argc, char **argv)
 	cli_build_cxxflags(bopt);
 	cli_build_ldflags(bopt);
 
-	(void)unlink(assets_header);
+	//(void)unlink(assets_header);//add by vk
 
 	/* Generate the assets. */
 	cli_file_open(assets_header, O_CREAT | O_TRUNC | O_WRONLY, &s_fd);

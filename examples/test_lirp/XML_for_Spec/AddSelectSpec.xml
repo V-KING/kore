@@ -1,0 +1,45 @@
+<lirp:AddSelectSpec MessageID='1000'
+  xmlns:lirp='http://www.tmri.cn'>
+  <lirp:SelectSpec>
+    <lirp:SelectSpecID>120</lirp:SelectSpecID>
+    <lirp:Priority>0</lirp:Priority>
+    <lirp:CurrentState>Disabled</lirp:CurrentState>
+    <lirp:Persistence>false</lirp:Persistence>
+    <!-- reserved 7 bits -->
+    <lirp:SelectSpecStartTrigger>
+      <lirp:SelectSpecStartTriggerType>Null</lirp:SelectSpecStartTriggerType>
+    </lirp:SelectSpecStartTrigger>
+    <lirp:SelectSpecStopTrigger>
+      <lirp:SelectSpecStopTriggerType>Null</lirp:SelectSpecStopTriggerType>
+      <lirp:DurationValue>0</lirp:DurationValue>
+    </lirp:SelectSpecStopTrigger>
+    <lirp:AntennaSpec>
+      <lirp:AntennaIDs>0</lirp:AntennaIDs>
+      <lirp:AntennaSpecStopTrigger>
+        <lirp:AntennaSpecStopTriggerType>Null</lirp:AntennaSpecStopTriggerType>
+        <lirp:DurationValue>0</lirp:DurationValue>
+      </lirp:AntennaSpecStopTrigger>
+      <lirp:RfSpec>
+        <lirp:RfSpecID>100</lirp:RfSpecID>
+        <lirp:ProtocolID>Hb</lirp:ProtocolID>
+        <lirp:SelectType>Inventory</lirp:SelectType>
+      </lirp:RfSpec>
+    </lirp:AntennaSpec>
+    <lirp:SelectReportSpec>
+      <lirp:SelectReportTrigger>Upon_N_Tags_Or_End_Of_SelectSpec</lirp:SelectReportTrigger>
+      <lirp:NValue>1</lirp:NValue>
+      <lirp:EnableSelectSpecID>true</lirp:EnableSelectSpecID>
+      <lirp:EnableSpecIndex>false</lirp:EnableSpecIndex>
+      <lirp:EnableRfSpecID>true</lirp:EnableRfSpecID>
+      <lirp:EnableAntennaID>true</lirp:EnableAntennaID>
+      <lirp:EnablePeakRSSI>true</lirp:EnablePeakRSSI>
+      <lirp:EnableFirstSeenTimestamp>false</lirp:EnableFirstSeenTimestamp>
+      <lirp:EnableLastSeenTimestamp>true</lirp:EnableLastSeenTimestamp>
+      <lirp:EnableTagSeenCount>true</lirp:EnableTagSeenCount>
+      <lirp:EnableAccessSpecID>true</lirp:EnableAccessSpecID>
+      <!-- reserved 7 bits -->
+    </lirp:SelectReportSpec>
+  </lirp:SelectSpec>
+</lirp:AddSelectSpec>
+
+

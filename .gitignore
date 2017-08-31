@@ -2,7 +2,9 @@
 *.swp
 *.kdev4
 *.bak
+*.bp
 kore
+1.xml
 
 # Object files
 *.o

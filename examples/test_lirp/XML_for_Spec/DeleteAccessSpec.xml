@@ -1,0 +1,4 @@
+<lirp:DeleteAccessSpec MessageID='1101'
+  xmlns:lirp='http://www.tmri.cn'>
+  <lirp:AccessSpecID>0</lirp:AccessSpecID>
+</lirp:DeleteAccessSpec>

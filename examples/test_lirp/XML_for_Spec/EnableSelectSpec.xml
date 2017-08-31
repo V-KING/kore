@@ -1,0 +1,4 @@
+<lirp:EnableSelectSpec MessageID='1001'
+  xmlns:lirp='http://www.tmri.cn'>
+  <lirp:SelectSpecID>120</lirp:SelectSpecID>
+</lirp:EnableSelectSpec>

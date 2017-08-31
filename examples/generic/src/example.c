@@ -26,6 +26,42 @@
 #include "assets.h"
 #define KORE_DEBUG
 
+#if 0
+#define print_dbg(fmt, arg...)
+#define print_info(fmt, arg...)
+#define print_err(fmt, arg...)
+#else
+#define print_dbg(fmt, arg...)      printf("[DBG][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
+#define print_info(fmt, arg...)     printf("[INFO][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
+#define print_err(fmt, arg...)      printf("[ERR][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
+#define print_pAddr(p1, p2)         printf("[Addr compare][0x%x :: 0x%x]",p1,p2)
+#define print_buf(buf, len)     do{         \
+    int i = 0;                              \
+    print_info("");                     \
+    printf("buf data = {");                 \
+    for(i = 0; i < len; i++)                \
+        printf("0x%02x, ", *(buf+i));           \
+    printf("}\n");                          \
+}while(0)
+
+
+#define print_buf_char(buf, len)     do{         \
+    int i = 0;                              \
+    print_info("");                     \
+    printf("buf data = {");                 \
+    for(i = 0; i < len; i++)                \
+        printf("%c, ", *(buf+i));           \
+    printf("}\n");                          \
+}while(0)
+#endif
+
+#ifdef RELEASE
+#define print_dbg(fmt, arg...)
+#define print_info(fmt, arg...)
+#define print_err(fmt, arg...)
+#define print_pAddr(p1, p2)
+#endif
+
 int		example_load(int);
 
 int		serve_style_css(struct http_request *);
@@ -245,9 +281,19 @@ serve_params_test(struct http_request *req)
 
 	if (req->method == HTTP_METHOD_GET)
 		http_populate_get(req);
-	else if (req->method == HTTP_METHOD_POST)
+	else if (req->method == HTTP_METHOD_POST){
 		http_populate_post(req);
-
+		//add by vk
+		print_info(" req->host        =%s\n",req->host);
+		print_info(" req->path        =%s\n",req->path);
+		print_info(" req->agent       =%s\n",req->agent);
+		print_info(" req->query_string=%s\n",req->query_string);
+		print_info(" req->http_body_path=%s\n",req->http_body_path);
+		print_info(" req->http_body->data=%s\n",req->http_body->data);
+		print_info(" req->http_body_length=%d\n",req->http_body_length);
+		print_buf(req->http_body->data, req->http_body_length);
+		print_buf_char(req->http_body->data, req->http_body_length);
+	}
 	b = kore_buf_alloc(asset_len_params_html);
 	kore_buf_append(b, asset_params_html, asset_len_params_html);
 

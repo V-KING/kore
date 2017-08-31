@@ -1,0 +1,6 @@
+*.o
+.flavor
+.objs
+test_lirp.so
+assets.h
+cert

@@ -25,6 +25,10 @@
 #include <signal.h>
 
 #include "kore.h"
+#include "lirp/llrp2xml.h"
+#include "lirp/xml2llrp.h"
+#include "lirp/ltkc.h"
+
 
 #if !defined(KORE_NO_HTTP)
 #include "http.h"
@@ -112,13 +116,17 @@ version(void)
 
 	exit(0);
 }
-
+LLRP_tSTypeRegistry *g_pTypeRegistry;
 int
 main(int argc, char *argv[])
 {
 	int		ch, flags;
-
+	g_pTypeRegistry = LLRP_getTheTypeRegistry();
 	flags = 0;
+// 	LLRP_AccessCommand_construct();
+//	LLRP_Element_construct(&LLRP_tdAccessCommand);
+// 	xmlFile2Element("/home/vk/kore/examples/test_lirp/XML_for_Spec/DeleteAccessSpec.xml");
+	
 
 #if !defined(KORE_SINGLE_BINARY)
 	while ((ch = getopt(argc, argv, "c:dfhnrv")) != -1) {

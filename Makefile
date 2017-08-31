@@ -1,4 +1,5 @@
 # Kore Makefile
+# Edit by liubaolong,20170830
 
 CC?=gcc
 PREFIX?=/usr/local
@@ -13,10 +14,15 @@ S_SRC=	src/kore.c src/buf.c src/cli.c src/config.c src/connection.c \
 
 CFLAGS+=-Wall -Werror -Wstrict-prototypes -Wmissing-prototypes
 CFLAGS+=-Wmissing-declarations -Wshadow -Wpointer-arith -Wcast-qual
-CFLAGS+=-Wsign-compare -Iincludes -std=c99 -pedantic
+CFLAGS+=-Wsign-compare -Iincludes -std=c99
 CFLAGS+=-DPREFIX='"$(PREFIX)"'
 LDFLAGS=-rdynamic -lssl -lcrypto
 
+#add your source here
+# CFLAGS+=-I examples/test_lirp/assets
+# S_SRC+=	examples/test_lirp/assets/vk_string.c
+LDFLAGS+=-I./includes -I./include/lirp -L./lib -lxmlllrp -lltkc -lxml2
+#end by vk
 ifneq ("$(DEBUG)", "")
 	CFLAGS+=-DKORE_DEBUG -g
 	NOOPT=1
@@ -81,9 +87,9 @@ else
 endif
 
 S_OBJS=	$(S_SRC:src/%.c=$(OBJDIR)/%.o)
-
+	
 $(KORE): $(OBJDIR) $(S_OBJS)
-	$(CC) $(S_OBJS) $(LDFLAGS) -o $(KORE)
+	$(CC) $(S_OBJS) $(LDFLAGS)  -o $(KORE)
 
 objects: $(OBJDIR) $(S_OBJS)
 
@@ -97,10 +103,18 @@ install:
 	mkdir -p $(INSTALL_DIR)
 	install -m 555 $(KORE) $(INSTALL_DIR)/$(KORE)
 	install -m 644 includes/*.h $(INCLUDE_DIR)
+	install -d $(INCLUDE_DIR)/lirp
+	install -m 644 includes/lirp/*.h $(INCLUDE_DIR)/lirp 
+	install -m 644 includes/lirp/version.inc $(INCLUDE_DIR)/lirp 
+	install -d /usr/local/lib/kore
+	install -m 644 lib/*.so /usr/local/lib/kore 
+	install -m 644 lib/kore.conf /etc/ld.so.conf.d/kore.conf
+	sudo ldconfig
 
 uninstall:
 	rm -f $(INSTALL_DIR)/$(KORE)
 	rm -rf $(INCLUDE_DIR)
+	rm -rf /usr/local/lib/kore
 
 $(OBJDIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
