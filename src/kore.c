@@ -123,9 +123,9 @@ main(int argc, char *argv[])
 	int		ch, flags;
 	g_pTypeRegistry = LLRP_getTheTypeRegistry();
 	flags = 0;
-// 	LLRP_AccessCommand_construct();
-//	LLRP_Element_construct(&LLRP_tdAccessCommand);
-// 	xmlFile2Element("/home/vk/kore/examples/test_lirp/XML_for_Spec/DeleteAccessSpec.xml");
+	LLRP_AccessCommand_construct();
+	LLRP_Element_construct(&LLRP_tdAccessCommand);
+	xmlFile2Element("/home/vk/kore/examples/test_lirp/XML_for_Spec/DeleteAccessSpec.xml");
 	
 
 #if !defined(KORE_SINGLE_BINARY)

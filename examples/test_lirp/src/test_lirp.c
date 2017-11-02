@@ -10,7 +10,7 @@
 // #include "../../includes/lirp/xml2llrp.h"
 // #include "../../includes/lirp/llrp2xml.h"
 #include "kore/lirp/ltkc.h"
-#include "kore/lirp/ltkc.h"
+#include "kore/lirp/xml2llrp.h"
 #include "kore/lirp/llrp2xml.h"
 #include "vk_string.h"
 
@@ -250,9 +250,8 @@ int		serve_index(struct http_request *req)
 		size_t postLen = req->http_body_length;
 // 		LLRP_tSElement *pElement = xmlFile2Element("XML_for_Spec/AddSelectSpec.xml");
 		repleseNULL2Eq(req->http_body->data, req->http_body_length, '=');
-// 		xmlStr2xmlFile(req->http_body->data,req->http_body_length,"1.xml");
-// 		LLRP_tSElement *pElement = xmlFile2Element("1.xml");
-		LLRP_tSElement *pElement;
+		xmlStr2xmlFile(req->http_body->data,req->http_body_length,"1.xml");
+		LLRP_tSElement *pElement = xmlFile2Element("1.xml");
 		print_info("---\n");
 		printXMLMessage(pElement);
 		print_info("---\n");
@@ -272,7 +271,7 @@ int		serve_index(struct http_request *req)
 			|| &LLRP_tdStopSelectSpec== pElement->pType
 		){
 			print_dbg("begin to connect\n");
-			sockid = connect_to_server("192.168.1.108",5084);
+			sockid = connect_to_server("192.168.1.251",5084);
 			if(sockid < 0){
 				print_err("Connect_to_server err\n");
 				goto return_index2_err;
