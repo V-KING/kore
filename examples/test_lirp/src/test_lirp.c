@@ -19,10 +19,11 @@
 #define print_info(fmt, arg...)
 #define print_err(fmt, arg...)
 #else
-#define print_dbg(fmt, arg...)      printf("[DBG][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
-#define print_info(fmt, arg...)     printf("[INFO][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
-#define print_err(fmt, arg...)      printf("[ERR][%s:%d %s]"fmt, __FILE__, __LINE__, __FUNCTION__, ##arg)
-#define print_pAddr(p1, p2)         printf("[Addr compare][0x%x :: 0x%x]",p1,p2)
+#define print_dbg(fmt, arg...)      printf("\033[36m[DBG ][%s: %s:%d]"fmt, __FILE__, __FUNCTION__, __LINE__, ##arg);
+#define print_info(fmt, arg...)     printf("\033[32m[INFO][%s: %s:%d]"fmt, __FILE__, __FUNCTION__, __LINE__, ##arg);
+#define print_err(fmt, arg...)      printf("\033[31m[ERR ][%s: %s:%d]"fmt, __FILE__, __FUNCTION__, __LINE__, ##arg);
+#define print_pAddr(p1, p2)         printf("\033[37m[Addr compare][%s: %s:%d][0x%x :: 0x%x]\n", __FILE__, __FUNCTION__, __LINE__, p1,p2);
+
 
 #define print_buf(buf, len)     do{         \
     int i = 0;                              \
@@ -202,6 +203,29 @@ int test(struct http_request *req)
 //     pTypeRegistry = LLRP_getTheTypeRegistry();
 // }
 
+char ip[20] = {0};
+char port[20] = {0};
+void read_config_file(char *path){
+    char *line = NULL;
+    size_t n;
+    FILE *pFile = fopen(path, "r");
+    char temp[50] = {0};
+    char buf[50] = {0};
+    int index = 0;
+    int a;
+
+    while ( getline(&line, &n, pFile) != -1)  {
+        if(strstr(line, "IP = ") != NULL){
+            sscanf(line, "IP = %s", ip);
+        }
+        if(strstr(line, "PORT = ") != NULL){
+            sscanf(line, "PORT = %s", port);
+        }
+    }
+
+    fclose(pFile);
+}
+
 extern int		serve_index(struct http_request *);
 int		serve_index(struct http_request *req)
 {
@@ -270,8 +294,11 @@ int		serve_index(struct http_request *req)
 			|| &LLRP_tdDisableSelectSpec== pElement->pType
 			|| &LLRP_tdStopSelectSpec== pElement->pType
 		){
-			print_dbg("begin to connect\n");
-			sockid = connect_to_server("192.168.1.251",5084);
+            read_config_file("../../Reader_ip.conf");
+            print_info("ip = %s\n", ip);  
+            print_info("port = %s\n", port);  
+            print_info("port int = %d\n", atoi(port));  
+			sockid = connect_to_server(ip,atoi(port));
 			if(sockid < 0){
 				print_err("Connect_to_server err\n");
 				goto return_index2_err;
