@@ -9,10 +9,120 @@
 </head>
 <body>
 <div class="container">
+  <div class="row" >
+    <button id="xmlstr" type="button" class="btn btn-primary btn-lg" style="color: rgb(212, 106, 64);">
+     SelectSpec
+    </button> 
+  </div>
+  
+  <div class="row">
   <h2>cmd</h2>  
   <input type="file" id="files" style="display:none" onchange="jsReadfile(this.files)"/>
   <button type="button" class="btn btn-success" id="readfile">发送xml文件消息</button>
+  </div>
+  
+  <div style="margin-top: 50px;">
+    <form class="bs-example bs-example-form" role="form">
+      <div class="row">
+        <div class="input-group">
+
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <input type="text" class="form-control"  placeholder="" id="SelectSpecIDinput">
+          </div>
+
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="EnableSelectSpec">EnableSelectSpec</button>
+            </span>
+          </div>
+
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="StartSelectSpec">StartSelectSpec</button>
+            </span>
+          </div>
+          
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="StopSelectSpec">StopSelectSpec</button>
+            </span>
+          </div>
+
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="DeleteSelectSpec">DeleteSelectSpec</button>
+            </span>
+          </div>
+
+          <div class="col-xs-12 col-sm-5 col-lg-2">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" id="DisableSelectSpec">DisableSelectSpec</button>
+            </span>
+          </div>
+          
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+<div style="margin-top: 10px;">
+  <form class="bs-example bs-example-form" role="form">
+    <div class="row">
+      <div class="input-group">
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <input type="text" class="form-control"  placeholder="" id="AccessSpecIDinput">
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="EnableAccessSpec">EnableAccessSpec</button>
+          </span>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="StartAccessSpec">StartAccessSpec</button>
+          </span>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="StopAccessSpec">StopAccessSpec</button>
+          </span>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="DeleteAccessSpec">DeleteAccessSpec</button>
+          </span>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 col-lg-2">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="DisableAccessSpec">DisableAccessSpec</button>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </form>
 </div>
+
+<form class="bs-example bs-example-form" role="form">
+    <div class="row">
+        <div class="input-group">
+            <div class="col-sm-2">
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button" id="DeleteAllSelectAccess">DeleteAllSelectAccess</button>
+                </span>
+            </div>
+        </div>
+    </row>
+</form>
+
 
 <div class="container">
   <h2>Lirp选择规则, 框架</h2>
@@ -191,15 +301,13 @@ function postXml(argument) {
          // + $(data).find('desc').text() + ' 价格:'
          // + $(data).find('price').text());
          $data = $(data);
-         console.log($data.text());
-         console.log($data.find('lirp:SelectSpecID').text());
-         console.log($data.find('SelectSpecID').text());
-         console.log($data);
-         console.log($data[0]);
-         console.log(($data[0].activeElement));
-         console.log($data.find('lirp:EnableSelectSpec'));
-         console.log($data.find('EnableSelectSpec'));
-         console.log($data.find('EnableSelectSpec').text());//prefix is not suport for jquery
+//          console.log("---");
+//          console.log($data.text());
+//          console.log("---");
+//          console.log($data.find('').text());
+//          console.log($data.find('SelectSpecID').text());
+//          ID = ($data.find('EnableSelectSpec').text());
+//          console.log("---");
          alert("发送成功!");
      },
      error:function(){
@@ -208,36 +316,155 @@ function postXml(argument) {
      }
   });
 }
-//main
+
+
 function clickSendSpec(argument) {
     updata();
     $xml.text(html);
     postXml(html);
 }
 
-function AddSelectSpec(argument) {
 
-} 
-function DeleteSelectSpec(argument) {
-  // body...
+function DeleteSelectSpec(SelectSpecID) {
+//   var SelectSpecID = $("#SelectSpecIDinput").val();
+  xml = "<lirp:DeleteSelectSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:SelectSpecID>";
+  xml += SelectSpecID;
+  xml += "</lirp:SelectSpecID>";
+  xml += "</lirp:DeleteSelectSpec>";
+  console.log(xml);
+  postXml(xml);
 }
 
-function EnableSelectSpec(argument) {
-  // body...
+function EnableSelectSpec(SelectSpecID) {
+  //var SelectSpecID = $("#SelectSpecIDinput").val();
+  xml = "<lirp:EnableSelectSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:SelectSpecID>";
+  xml += SelectSpecID;
+  xml += "</lirp:SelectSpecID>";
+  xml += "</lirp:EnableSelectSpec>";
+  console.log(xml);
+  postXml(xml);
 }
-function StartSelectSpec(argument) {
-  // body...
+function StartSelectSpec(SelectSpecID) {
+//   var SelectSpecID = $("#SelectSpecIDinput").val();
+  xml = "<lirp:StartSelectSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:SelectSpecID>";
+  xml += SelectSpecID;
+  xml += "</lirp:SelectSpecID>";
+  xml += "</lirp:StartSelectSpec>";
+  //console.log(xml);
+  postXml(xml);
 }
-function DisableSelectSpec(argument) {
-  // body...
+function DisableSelectSpec(SelectSpecID) {
+//   var SelectSpecID = $("#SelectSpecIDinput").val();
+  xml = "<lirp:DisableSelectSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:SelectSpecID>";
+  xml += SelectSpecID;
+  xml += "</lirp:SelectSpecID>";
+  xml += "</lirp:DisableSelectSpec>";
+  console.log(xml);
+  postXml(xml);
 }
-function StopSelectSpec(argument) {
-  // body...
+function StopSelectSpec(SelectSpecID) {
+//   var SelectSpecID = $("#SelectSpecIDinput").val();
+  xml = "<lirp:StopSelectSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:SelectSpecID>";
+  xml += SelectSpecID;
+  xml += "</lirp:SelectSpecID>";
+  xml += "</lirp:StopSelectSpec>";
+  console.log(xml);
+  postXml(xml);
+}
+
+// // // // // // // // // // // 
+
+function DeleteAccessSpec(AccessSpecID) {
+//   var AccessSpecID = $("#AccessSpecIDinput").val();
+  xml = "<lirp:DeleteAccessSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:AccessSpecID>";
+  xml += AccessSpecID;
+  xml += "</lirp:AccessSpecID>";
+  xml += "</lirp:DeleteAccessSpec>";
+  console.log(xml);
+  postXml(xml);
+}
+
+function EnableAccessSpec(AccessSpecID) {
+  //var AccessSpecID = $("#AccessSpecIDinput").val();
+  xml = "<lirp:EnableAccessSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:AccessSpecID>";
+  xml += AccessSpecID;
+  xml += "</lirp:AccessSpecID>";
+  xml += "</lirp:EnableAccessSpec>";
+  console.log(xml);
+  postXml(xml);
+}
+function StartAccessSpec(AccessSpecID) {
+//   var AccessSpecID = $("#AccessSpecIDinput").val();
+  xml = "<lirp:StartAccessSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:AccessSpecID>";
+  xml += AccessSpecID;
+  xml += "</lirp:AccessSpecID>";
+  xml += "</lirp:StartAccessSpec>";
+  //console.log(xml);
+  postXml(xml);
+}
+function DisableAccessSpec(AccessSpecID) {
+//   var AccessSpecID = $("#AccessSpecIDinput").val();
+  xml = "<lirp:DisableAccessSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:AccessSpecID>";
+  xml += AccessSpecID;
+  xml += "</lirp:AccessSpecID>";
+  xml += "</lirp:DisableAccessSpec>";
+  console.log(xml);
+  postXml(xml);
+}
+function StopAccessSpec(AccessSpecID) {
+//   var AccessSpecID = $("#AccessSpecIDinput").val();
+  xml = "<lirp:StopAccessSpec MessageID='1001' xmlns:lirp='http://www.tmri.cn'>";
+  xml += " <lirp:AccessSpecID>";
+  xml += AccessSpecID;
+  xml += "</lirp:AccessSpecID>";
+  xml += "</lirp:StopAccessSpec>";
+  console.log(xml);
+  postXml(xml);
+}
+
+function DeleteAllSelectAccess() {
+  DeleteSelectSpec(0);
+  DeleteAccessSpec(0);
+  postXml(xml);
 }
 
 $("#readfile").click(function(){//点击导入按钮，使files触发点击事件，然后完成读取文件的操作。
     $("#files").click();
 });
+$("#EnableSelectSpec.btn").click(function(){
+    var SelectSpecID = $("#SelectSpecIDinput").val();
+    EnableSelectSpec(SelectSpecID);
+});
+$("#StartSelectSpec.btn").click(function(){
+    var SelectSpecID = $("#SelectSpecIDinput").val();
+    StartSelectSpec(SelectSpecID);
+});
+$("#StopSelectSpec.btn").click(function(){
+    var SelectSpecID = $("#SelectSpecIDinput").val();
+    StopSelectSpec(SelectSpecID);
+});
+$("#DisableSelectSpec.btn").click(function(){
+    var SelectSpecID = $("#SelectSpecIDinput").val();
+    DisableSelectSpec(SelectSpecID);
+});
+$("#DeleteSelectSpec.btn").click(function(){
+    var SelectSpecID = $("#SelectSpecIDinput").val();
+    DeleteSelectSpec(SelectSpecID);
+});
+$("#DeleteAllSelectAccess.btn").click(function(){
+    DeleteAllSelectAccess();
+});
+
+
 function jsReadfile(files){
   // var selectedFile = document.getElementById("files").files[0];//获取读取的File对象
   var selectedFile = files[0];//获取读取的File对象
@@ -248,8 +475,15 @@ function jsReadfile(files){
   var reader = new FileReader();//这里是核心！！！读取操作就是由它完成的。
   reader.readAsText(selectedFile);//读取文件的内容
   reader.onload = function(){
-      console.log(this.result);//当读取完成之后会回调这个函数，然后此时文件的内容存储到了result中。直接操作即可。
+      //console.log(this.result);//当读取完成之后会回调这个函数，然后此时文件的内容存储到了result中。直接操作即可。
       postXml(this.result);
+      xmlStr = "<xml>";
+      xmlStr += this.result;
+      xmlStr += "</xml>";
+      var xmlDoc = $.parseXML(xmlStr);
+      var $SelectSpecID = $(xmlDoc).find("SelectSpecID");
+      //console.log($xmlDoc.find('SelectSpecID'))//can't contain <lirp:SelectSpecID>
+      
   };
 }
 </script>
