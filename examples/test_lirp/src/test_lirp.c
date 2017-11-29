@@ -52,6 +52,11 @@
 #define print_pAddr(p1, p2)
 #endif
 
+int serve_bootstrap_css(struct http_request *req);
+int serve_jquery_js(struct http_request *req);
+int serve_bootstrap_js(struct http_request *req);
+
+
 void
 printXMLMessage (
     LLRP_tSMessage *              pMessage)
@@ -65,6 +70,48 @@ printXMLMessage (
     printf("===================================\n");
     printf("%s", aBuf);
 }
+
+
+int serve_bootstrap_js(struct http_request *req)
+{
+    http_response_header(req, "content-type", "text/js");
+    http_response(req, 200, asset_bootstrap_min_js, asset_len_bootstrap_min_js);
+
+    return (KORE_RESULT_OK);
+}
+
+int serve_jquery_js(struct http_request *req)
+{
+    http_response_header(req, "content-type", "text/js");
+    http_response(req, 200, asset_jquery_min_js, asset_len_jquery_min_js);
+
+    return (KORE_RESULT_OK);
+}
+int serve_bootstrap_css(struct http_request *req)
+{
+    char        *date;
+    time_t      tstamp;
+
+    tstamp = 0;
+    if (http_request_header(req, "if-modified-since", &date)) {
+        tstamp = kore_date_to_time(date);
+        kore_debug("header was present with %ld", tstamp);
+    }
+
+    if (tstamp != 0 && tstamp <= asset_mtime_bootstrap_min_css) {
+        http_response(req, 304, NULL, 0);
+    } else {
+        date = kore_time_to_date(asset_mtime_bootstrap_min_css);
+        if (date != NULL)
+            http_response_header(req, "last-modified", date);
+
+        http_response_header(req, "content-type", "text/css");
+        http_response(req, 200, asset_bootstrap_min_css, asset_len_bootstrap_min_css);
+    }
+
+    return (KORE_RESULT_OK);
+}
+
 
 int connect_to_server(char* ip, int port){
 	int sock = 0;
