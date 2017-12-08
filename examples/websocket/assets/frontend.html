@@ -37,7 +37,7 @@ function onmessage(evt) {
 }
 
 function connect() {
-	socket = new WebSocket("wss://127.0.0.1:8888/connect");
+	socket = new WebSocket("wss://192.168.91.132:8888/connect");
 
 	socket.onopen = function(evt) { open(evt) };
 	socket.onclose = function(evt) { alert("closed"); };
